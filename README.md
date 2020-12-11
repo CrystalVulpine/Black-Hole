@@ -1,0 +1,1 @@
+Black Hole is a simple game made in JS where you try to maneuver a spaceship and avoid hitting objects. You have 5 damage levels before it explodes. Move the ship around with your mouse pointer. Don't fall into a black hole.
