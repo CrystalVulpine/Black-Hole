@@ -48,7 +48,7 @@ function draw() {
 		if (!asteroids[i] || asteroids[i].x < ship.x - canvas.width / 2 - Asteroid.asteroidSvg.width) {
 			newAsteroid(i);
 		}
-		if (Math.abs(asteroids[i].x - ship.x) < Ship.shipSvg.width / 2 + (Asteroid.asteroidSvg.width / 2) / 2 && Math.abs(asteroids[i].y - ship.y) < Ship.shipSvg.height / 2 + (Asteroid.asteroidSvg.height / 2) / 2) {
+		if (Math.abs(asteroids[i].x - ship.x) < Ship.shipSvg.width * Math.cos(ship.angle) + (Asteroid.asteroidSvg.width / 2) / 2 && Math.abs(asteroids[i].y - ship.y) < Ship.shipSvg.height * Math.sin(ship.angle) + (Asteroid.asteroidSvg.height / 2) / 2) {
 			ship.damage++;
 			newAsteroid(i);
 		}
