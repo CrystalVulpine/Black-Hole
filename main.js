@@ -18,20 +18,23 @@ var gameOver = false;
 var asteroids = new Array(10);
 
 function newAsteroid(i) {
-	let x = ship.x + canvas.width + Math.random() * canvas.width;
-	let y = Math.random() * canvas.height;
-	for (let j = 0; j < 10; j++) {
-		if (!asteroids[j]) {
-			continue;
+	position:
+	while (true) {
+		let x = ship.x + canvas.width + Math.random() * canvas.width;
+		let y = Math.random() * canvas.height;
+		for (let j = 0; j < 10; j++) {
+			if (!asteroids[j]) {
+				continue;
+			}
+
+			// We don't want the asteroids to be so close that they're impossible to avoid.
+			if (Math.abs(x - asteroids[j].x) < 200 && Math.abs(y - asteroids[j].y) < 200) {
+				continue position;
+			}
 		}
-		
-		// We don't want the asteroids to be so close that they're impossible to avoid.
-		if (Math.abs(x - asteroids[j].x) < 200 && Math.abs(y - asteroids[j].y) < 200) {
-			newAsteroid(i);
-			return;
-		}
+		asteroids[i] = new Asteroid(x, y);
+		break;
 	}
-	asteroids[i] = new Asteroid(x, y);
 }
 
 for (let i = 0; i < 10; i++) {
@@ -42,13 +45,13 @@ function draw() {
 	if (gameOver) {
 		return;
 	}
-	
+
 	ship.move();
 	for (let i = 0; i < 10; i++) {
 		if (!asteroids[i] || asteroids[i].x < ship.x - canvas.width / 2 - Asteroid.asteroidSvg.width) {
 			newAsteroid(i);
 		}
-		if (Math.abs(asteroids[i].x - ship.x) < Ship.shipSvg.width * Math.cos(ship.angle) + (Asteroid.asteroidSvg.width / 2) / 2 && Math.abs(asteroids[i].y - ship.y) < Ship.shipSvg.height * Math.sin(ship.angle) + (Asteroid.asteroidSvg.height / 2) / 2) {
+		if (Math.abs(asteroids[i].x - ship.x) < Ship.shipSvg.width * Math.cos(Math.abs(ship.angle)) + (Asteroid.asteroidSvg.width / 2) / 2 && Math.abs(asteroids[i].y - ship.y) < Ship.shipSvg.height * Math.sin(Math.abs(ship.angle)) + (Asteroid.asteroidSvg.height / 2) / 2) {
 			ship.damage++;
 			newAsteroid(i);
 		}
